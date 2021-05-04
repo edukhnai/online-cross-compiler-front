@@ -6,8 +6,8 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-
-# dependencies
+#
+## dependencies
 /node_modules
 
 # profiling files
