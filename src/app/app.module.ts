@@ -7,7 +7,11 @@ import { AppComponent } from './app.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
 
 import { HttpClientModule } from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import {ReactiveFormsModule} from '@angular/forms';
     HttpClientModule,
     AppRoutingModule,
     CodeEditorModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

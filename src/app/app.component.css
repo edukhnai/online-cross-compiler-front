@@ -2,4 +2,11 @@ textarea {
   resize: none;
   position: relative;
 }
-
+mat-hint {
+  color: white;
+}
+mat-form-field {
+  background-color: teal;
+  width: max-content;
+  height: max-content;
+}
