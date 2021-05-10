@@ -1,6 +1,8 @@
 {
-  "name": "thesis",
-  "version": "0.0.0",
+  "name": "online-cross-compiler-front",
+  "version": "1.0.0",
+  "description": "Online Cross Compiler with Parallel Programming Support",
+  "author": "Ekaterina Dukhnai @katedukhnai, Lilia Kudelina @LiaKudelina",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,7 +26,7 @@
     "@ngstack/code-editor": "^3.0.0",
     "again": "0.0.1",
     "rxjs": "~6.6.0",
-    "tslib": "^2.0.0",
+    "tslib": "^2.2.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
