@@ -1,10 +1,14 @@
 textarea {
   resize: none;
   position: relative;
+  background-color:black;
+  color:white;
 }
+
 mat-hint {
   color: white;
 }
+
 mat-form-field {
   background-color: teal;
   width: max-content;

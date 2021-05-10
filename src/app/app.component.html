@@ -1,32 +1,50 @@
 <div class="container">
-<h2> Online Cross Compiler with Parallel Programming Support </h2>
-  <b > This is the Online Cross Compilation system with Parallel Programming support.
-    <br> Authors: Kate Dukhnay, Olga Kostyukova, Liliia Kudelina.
-    <br> Supported PLs: </b> <i>C, C++ OpenCL 1.2, OpenCL 1.2 C++ API, OpenCL Kernel (.cl) compilation into PTX (.ptx) CUDA file for NVIDIA GeForce GTX 1050ti and Tesla K80 GPGPUs, OpenCL Kernel (.cl) compilation into binary (.bin) file for AMD Radeon RX5700 GPU.</i>
-      <div ><h5 *ngIf="selectedLanguage === 'c' || selectedLanguage === 'cpp' || selectedLanguage === 'copencl' || selectedLanguage === 'cppopencl'">Program</h5><h5 *ngIf="selectedLanguage === 'openclptx1050ti' || selectedLanguage === 'openclptxk80' || selectedLanguage === 'openclamd5700'">Kernel</h5><ngs-code-editor theme="vs-dark"></ngs-code-editor></div>
-      <div *ngIf="selectedLanguage === 'copencl' || selectedLanguage === 'cppopencl'"><h5>Kernel</h5><ngs-code-editor theme="vs-dark"></ngs-code-editor></div>
+  <h2>Online Cross Compiler with Parallel Programming Support</h2>
+  <b>This is the Online Cross Compilation system with Parallel Programming support.
+    <br>Authors: Ekaterina Dukhnai, Olga Kostyukova, Lilia Kudelina.
+    <br>Supported PLs:
+  </b>C, C++ OpenCL 1.2, OpenCL 1.2 C++ API, OpenCL Kernel (.cl) compilation into PTX (.ptx) CUDA file for NVIDIA
+  GeForce GTX 1050ti and Tesla K80 GPGPUs, OpenCL Kernel (.cl) compilation into binary (.bin) file for AMD Radeon RX5700
+  GPU.
+  <div><h5
+    *ngIf="selectedLanguage === 'c' || selectedLanguage === 'cpp' || selectedLanguage === 'copencl' || selectedLanguage === 'cppopencl'">
+    Program</h5>
+    <h5
+      *ngIf="selectedLanguage === 'openclptx1050ti' || selectedLanguage === 'openclptxk80' || selectedLanguage === 'openclamd5700'">
+      Kernel
+    </h5>
+    <ngs-code-editor theme="vs-dark" [codeModel]="scriptModel"></ngs-code-editor>
+  </div>
+  <div *ngIf="selectedLanguage === 'copencl' || selectedLanguage === 'cppopencl'"><h5>Kernel</h5>
+    <ngs-code-editor theme="vs-dark" [codeModel]="kernelModel"></ngs-code-editor>
+  </div>
   <br>
   <form>
-  <mat-form-field appearance="fill" color="primary">
-    <mat-label>Select programming language</mat-label>
-    <mat-select [(ngModel)]="selectedLanguage" required name="l" class="selectoror">
-      <mat-option *ngFor="let l of languages" [value]="l.value">{{l.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field appearance="fill" color="primary">
+      <mat-label>Select programming language</mat-label>
+      <mat-select [(ngModel)]="selectedLanguage" required name="l" class="selector">
+        <mat-option *ngFor="let l of languages" [value]="l.value">{{l.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
   <p>Currently selected compilation language is {{selectedLanguage}}</p>
   <p><a class="waves-effect waves-light btn-large" id="buttoncompile"
-     (click)="runCompile()">
+        (click)="runCompile()">
     <i class="material-icons right"></i>
     Compile
   </a></p>
 
-  <p *ngIf="selectedLanguage !== 'openclptx1050ti' && selectedLanguage !== 'openclptxk80' && selectedLanguage !== 'openclamd5700'"><a class="waves-effect waves-light btn-large" id="buttonexecute"
-     (click)="runCompileExecute()">
-    <i class="material-icons right"></i>
-    Compile & Execute
-  </a></p>
+  <p
+    *ngIf="selectedLanguage !== 'openclptx1050ti' && selectedLanguage !== 'openclptxk80' && selectedLanguage !== 'openclamd5700'">
+    <a class="waves-effect waves-light btn-large" id="buttonexecute" (click)="runCompileExecute()">
+      <i class="material-icons right"></i>
+      Compile & Execute
+    </a>
+  </p>
 
-  <textarea readonly></textarea>
+  <p>Output (stdOut):</p>
+  <textarea [value]="stdOutTextArea" readonly></textarea>
 
+  <p>Errors (stdErr):</p>
+  <textarea [value]="stdErrTextArea" readonly></textarea>
 </div>

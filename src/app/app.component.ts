@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
+import {ILanguage} from './ILanguage';
+import {CompileService} from './services/CompileService';
+import {CompileExecuteService} from './services/CompileExecuteService';
+import {CodeModel} from '@ngstack/code-editor';
+import {CompileExecuteResponse} from './services/dto/CompileExecuteResponse';
 
-interface Language {
-  name: string; value: string;
-}
 
 @Component({
   selector: 'app-root',
@@ -12,29 +14,44 @@ interface Language {
 export class AppComponent {
   title = 'thesis';
   selectedLanguage = 'cpp';
-  programOrKernel = true; // true equals to program, false - to kernel
-  languages: Language [] = [
-    { name: 'C', value: 'c'},
-    { name: 'C++11', value: 'cpp'},
-    { name: 'OpenCL 1.2 Standard C API', value: 'copencl'},
-    { name: 'OpenCL 1.2 C++ API Bindings', value: 'cppopencl'},
-    { name: 'OpenCL Kernel PTX for NVIDIA GeForce GTX 1050 Ti', value: 'openclptx1050ti'},
-    { name: 'OpenCL Kernel PTX for NVIDIA Tesla K80', value: 'openclptxk80'},
-    { name: 'OpenCL Kernel Binary for AMD Radeon RX 5700', value: 'openclamd5700'}
+  languages: ILanguage [] = [
+    {name: 'C', value: 'c'},
+    {name: 'C++11', value: 'cpp'},
+    {name: 'OpenCL 1.2 Standard C API', value: 'copencl'},
+    {name: 'OpenCL 1.2 C++ API Bindings', value: 'cppopencl'},
+    {name: 'OpenCL Kernel PTX for NVIDIA GeForce GTX 1050 Ti', value: 'openclptx1050ti'},
+    {name: 'OpenCL Kernel PTX for NVIDIA Tesla K80', value: 'openclptxk80'},
+    {name: 'OpenCL Kernel Binary for AMD Radeon RX 5700', value: 'openclamd5700'}
   ];
-  runCompileExecute(): void {
-    alert('Compile&Execute Button clicked');
+  scriptModel: CodeModel = {
+    language: 'c++',
+    uri: '',
+    value: ''
+  };
+  kernelModel: CodeModel = {
+    language: 'c++',
+    uri: '',
+    value: ''
+  };
+  stdOutTextArea = '';
+  stdErrTextArea: string | null = '';
+
+  constructor(private compileService: CompileService, private compileExecuteService: CompileExecuteService) {
   }
+
   runCompile(): void {
-    alert('Compile Button activated');
+    this.compileService.post(this.selectedLanguage, this.scriptModel.value, this.kernelModel.value)
+      .subscribe((response: CompileExecuteResponse) => {
+        this.stdOutTextArea = response.stdout;
+        this.stdErrTextArea = response.stderr;
+      });
   }
-  checkProgramOrKernel(): void {
-  if (this.selectedLanguage === 'openclptx1050ti' || this.selectedLanguage === 'openclptxk80' || this.selectedLanguage === 'openclamd5700')
-    {
-      this.programOrKernel = false;
-    }
-    else {
-      this.programOrKernel = true;
-    }
+
+  runCompileExecute(): void {
+    this.compileExecuteService.post(this.selectedLanguage, this.scriptModel.value, this.kernelModel.value)
+      .subscribe((response: CompileExecuteResponse) => {
+        this.stdOutTextArea = response.stdout;
+        this.stdErrTextArea = response.stderr;
+      });
   }
 }
