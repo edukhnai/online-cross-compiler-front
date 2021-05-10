@@ -6,6 +6,9 @@
   </b>C, C++ OpenCL 1.2, OpenCL 1.2 C++ API, OpenCL Kernel (.cl) compilation into PTX (.ptx) CUDA file for NVIDIA
   GeForce GTX 1050ti and Tesla K80 GPGPUs, OpenCL Kernel (.cl) compilation into binary (.bin) file for AMD Radeon RX5700
   GPU.
+  <div *ngIf="selectedLanguage === 'copencl' || selectedLanguage === 'cppopencl'"><h5>Kernel</h5>
+    <textarea class="kernelArea" placeholder="Enter kernel code" [(ngModel)]="kernelText"></textarea>
+  </div>
   <div><h5
     *ngIf="selectedLanguage === 'c' || selectedLanguage === 'cpp' || selectedLanguage === 'copencl' || selectedLanguage === 'cppopencl'">
     Program</h5>
@@ -14,9 +17,6 @@
       Kernel
     </h5>
     <ngs-code-editor theme="vs-dark" [codeModel]="scriptModel"></ngs-code-editor>
-  </div>
-  <div *ngIf="selectedLanguage === 'copencl' || selectedLanguage === 'cppopencl'"><h5>Kernel</h5>
-    <ngs-code-editor theme="vs-dark" [codeModel]="kernelModel"></ngs-code-editor>
   </div>
   <br>
   <form>
