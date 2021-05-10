@@ -14,3 +14,8 @@ mat-form-field {
   width: max-content;
   height: max-content;
 }
+
+.kernelArea {
+  width: available;
+  height: 200px;
+}
