@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ILanguage} from './ILanguage';
 import {CompileService} from './services/CompileService';
 import {CompileExecuteService} from './services/CompileExecuteService';
@@ -14,6 +14,7 @@ import {CompileExecuteResponse} from './services/dto/CompileExecuteResponse';
 export class AppComponent {
   title = 'thesis';
   selectedLanguage = 'cpp';
+  @Input() readonly = false;
   languages: ILanguage [] = [
     {name: 'C', value: 'c'},
     {name: 'C++11', value: 'cpp'},
@@ -26,21 +27,16 @@ export class AppComponent {
   scriptModel: CodeModel = {
     language: 'c++',
     uri: '',
-    value: ''
-  };
-  kernelModel: CodeModel = {
-    language: 'c++',
-    uri: '',
-    value: ''
+    value: '{}'
   };
   stdOutTextArea = '';
   stdErrTextArea: string | null = '';
-
+  kernelText = 'hahah';
   constructor(private compileService: CompileService, private compileExecuteService: CompileExecuteService) {
   }
 
   runCompile(): void {
-    this.compileService.post(this.selectedLanguage, this.scriptModel.value, this.kernelModel.value)
+    this.compileService.post(this.selectedLanguage, this.scriptModel.value, this.kernelText) // this.kernelModel.value
       .subscribe((response: CompileExecuteResponse) => {
         this.stdOutTextArea = response.stdout;
         this.stdErrTextArea = response.stderr;
@@ -48,7 +44,7 @@ export class AppComponent {
   }
 
   runCompileExecute(): void {
-    this.compileExecuteService.post(this.selectedLanguage, this.scriptModel.value, this.kernelModel.value)
+    this.compileExecuteService.post(this.selectedLanguage, this.scriptModel.value, this.kernelText)
       .subscribe((response: CompileExecuteResponse) => {
         this.stdOutTextArea = response.stdout;
         this.stdErrTextArea = response.stderr;
