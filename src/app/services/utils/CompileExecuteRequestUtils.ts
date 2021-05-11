@@ -8,10 +8,10 @@ export class CompileExecuteRequestUtils {
     scriptValue: string | null,
     kernelValue: string | null
   ): CompileExecuteRequest {
-    if (scriptValue != null) {
+    if (kernelValue != null && scriptValue != null) {
       return new CompileExecuteRequest(language, scriptValue, kernelValue);
-    } else if (kernelValue != null) {
-      return new CompileExecuteRequest(language, kernelValue);
+    } else if (scriptValue != null) {
+      return new CompileExecuteRequest(language, scriptValue);
     } else {
       alert(scriptOrKernelNotProvidedErrorMsg);
       throw Error(scriptOrKernelNotProvidedErrorMsg);
