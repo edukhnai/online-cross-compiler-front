@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'http://localhost:8091/online-cross-compiler-back'
+  API_URL: 'http://84.252.134.186:22/online-cross-compiler-back'
 };
