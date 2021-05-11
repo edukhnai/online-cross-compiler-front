@@ -31,23 +31,23 @@ export class AppComponent {
   };
   stdOutTextArea = '';
   stdErrTextArea: string | null = '';
-  kernelText = 'hahah';
+  kernelText: string | null = '';
   constructor(private compileService: CompileService, private compileExecuteService: CompileExecuteService) {
   }
-
   runCompile(): void {
     this.compileService.post(this.selectedLanguage, this.scriptModel.value, this.kernelText) // this.kernelModel.value
       .subscribe((response: CompileExecuteResponse) => {
         this.stdOutTextArea = response.stdout;
         this.stdErrTextArea = response.stderr;
       });
+    this.kernelText = null;
   }
-
   runCompileExecute(): void {
     this.compileExecuteService.post(this.selectedLanguage, this.scriptModel.value, this.kernelText)
       .subscribe((response: CompileExecuteResponse) => {
         this.stdOutTextArea = response.stdout;
         this.stdErrTextArea = response.stderr;
       });
+    this.kernelText = null;
   }
 }

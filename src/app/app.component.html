@@ -33,7 +33,6 @@
     <i class="material-icons right"></i>
     Compile
   </a></p>
-
   <p
     *ngIf="selectedLanguage !== 'openclptx1050ti' && selectedLanguage !== 'openclptxk80' && selectedLanguage !== 'openclamd5700'">
     <a class="waves-effect waves-light btn-large" id="buttonexecute" (click)="runCompileExecute()">
@@ -41,10 +40,8 @@
       Compile & Execute
     </a>
   </p>
-
   <p>Output (stdOut):</p>
   <textarea [value]="stdOutTextArea" readonly></textarea>
-
   <p>Errors (stdErr):</p>
   <textarea [value]="stdErrTextArea" readonly></textarea>
 </div>
